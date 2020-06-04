@@ -1,6 +1,8 @@
 import logging.config
 import requests
 import werobot
+import json
+
 from werobot import WeRoBot
 
 from qa_tool import QaTool
@@ -36,30 +38,38 @@ def hello(message):
         "qaParams": qaParams
     }
     #
-    r = requests.post(bot_url, json=post_json, timeout=3)
-    response_texts = []
-    if 'responseText' in r:
-        for cont in r['responseText']:
-            rtype = cont.get('type')
-            content = cont.get('content')
-            if rtype == 'Text':
-                response_texts.append(content)
-            elif rtype == 'QA':
-                answers = content.get('answers', [])
-                if len(answers) == 1:
-                    know_id = answers[0].get('answer')
-                    answer = qa_tool.get_answer(tenant_id, know_id)
-                    response_texts.append(answer)
-                elif len(answers) > 1:
-                    titles = []
-                    for ans in answers:
-                        know_id = ans.get('answer')
-                        title = qa_tool.get_title(tenant_id, know_id)
-                        titles.append(title)
-                    response_texts.append("你想咨询以下哪些问题？" + "\n".join(titles))
-    response_text = "\n".join(response_texts)
+    logger.info("request params:{}".format(json.dumps(post_json, ensure_ascii=False, indent=4)))
+    try:
+        r = requests.post(bot_url, json=post_json, timeout=3)
+        r = r.json()
+        logger.info("request result:{}".format(json.dumps(r, ensure_ascii=False, indent=4)))
 
-    return response_text
+        response_texts = []
+        if 'responseText' in r:
+            for cont in r['responseText']:
+                rtype = cont.get('type')
+                content = cont.get('content')
+                if rtype == 'Text':
+                    response_texts.append(content)
+                elif rtype == 'QA':
+                    answers = content.get('answers', [])
+                    if len(answers) == 1:
+                        know_id = answers[0].get('answer')
+                        answer = qa_tool.get_answer(tenant_id, know_id)
+                        response_texts.append(answer)
+                    elif len(answers) > 1:
+                        titles = []
+                        for ans in answers:
+                            know_id = ans.get('answer')
+                            title = qa_tool.get_title(tenant_id, know_id)
+                            titles.append(title)
+                        response_texts.append("你想咨询以下哪些问题？" + "\n".join(titles))
+        response_text = "\n".join(response_texts)
+
+        return response_text
+    except Exception as e:
+        logger.error("error:{}".format(e), exc_info=True)
+        return ""
 
 
 @robot.image
