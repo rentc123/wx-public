@@ -12,8 +12,8 @@ logging.config.fileConfig('logging.conf', disable_existing_loggers=False)
 
 robot = werobot.WeRoBot(token='abc')
 
-# bot_url = "http://dialogue_agent:5008/dialogue_agent/response"
-bot_url = "http://0.0.0.0:5008/dialogue_agent/response"
+bot_url = "http://dialogue_agent:5008/dialogue_agent/response"
+# bot_url = "http://0.0.0.0:5008/dialogue_agent/response"
 a = WeRoBot()
 
 data_path = 'data/qa_pair_data.txt'
