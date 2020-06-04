@@ -50,6 +50,7 @@ def hello(message):
                 rtype = cont.get('type')
                 content = cont.get('content')
                 if rtype == 'Text':
+                    logger.info("Text content:{}".format(content))
                     response_texts.append(content)
                 elif rtype == 'QA':
                     answers = content.get('answers', [])
@@ -66,6 +67,7 @@ def hello(message):
                         response_texts.append("你想咨询以下哪些问题？" + "\n".join(titles))
         response_text = "\n".join(response_texts)
 
+        logger.info("response_text:{}".format(response_text))
         return response_text
     except Exception as e:
         logger.error("error:{}".format(e), exc_info=True)
