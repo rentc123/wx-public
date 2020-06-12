@@ -56,14 +56,14 @@ def hello(message):
                     answers = content.get('answers', [])
                     logger.info("answers:{}".format(answers))
                     if len(answers) == 1:
-                        know_id = answers[0].get('answer')
+                        know_id = answers[0].get('src_id')
                         logger.info("know_id: {}".format(know_id))
                         answer = qa_tool.get_answer(tenant_id, know_id)
                         response_texts.append(answer)
                     elif len(answers) > 1:
                         titles = []
                         for ans in answers:
-                            know_id = ans.get('answer')
+                            know_id = ans.get('src_id')
                             title = qa_tool.get_title(tenant_id, know_id)
                             titles.append(title)
                         response_texts.append("你想咨询以下哪些问题？" + "\n".join(titles))
