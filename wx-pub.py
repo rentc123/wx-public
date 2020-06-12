@@ -66,7 +66,7 @@ def hello(message):
                             know_id = ans.get('answer')
                             title = qa_tool.get_title(tenant_id, know_id)
                             titles.append(title)
-                        response_texts.append("你想咨询以下哪些问题？" + "\n".join(titles))
+                        response_texts.append("你想咨询以下哪些问题？\n" + "\n".join(titles))
         response_text = "\n".join(response_texts)
         logger.info("response_text:{}".format(response_text))
         return response_text
