@@ -54,6 +54,7 @@ def hello(message):
                     response_texts.append(content)
                 elif rtype == 'QA':
                     answers = content.get('answers', [])
+                    logger.info("answers:{}".format(answers))
                     if len(answers) == 1:
                         know_id = answers[0].get('answer')
                         logger.info("know_id: {}".format(know_id))
