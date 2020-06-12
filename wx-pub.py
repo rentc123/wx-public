@@ -68,7 +68,6 @@ def hello(message):
                             titles.append(title)
                         response_texts.append("你想咨询以下哪些问题？" + "\n".join(titles))
         response_text = "\n".join(response_texts)
-
         logger.info("response_text:{}".format(response_text))
         return response_text
     except Exception as e:
