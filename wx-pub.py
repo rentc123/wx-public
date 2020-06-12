@@ -40,7 +40,7 @@ def hello(message):
     #
     logger.info("request params:{}".format(json.dumps(post_json, ensure_ascii=False, indent=4)))
     try:
-        r = requests.post(bot_url, json=post_json, timeout=3)
+        r = requests.post(bot_url, json=post_json, timeout=5)
         r = r.json()
         logger.info("request result:{}".format(json.dumps(r, ensure_ascii=False, indent=4)))
 
