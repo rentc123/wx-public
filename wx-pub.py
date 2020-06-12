@@ -27,7 +27,7 @@ def hello(message):
     user_id = message.source
     tenant_id = "1000"
     qaParams = {
-        "toAnswer": 3,
+        "topAnswer": 3,
         "lang": "zh"
     }
     post_json = {
