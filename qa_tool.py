@@ -33,19 +33,19 @@ class QaTool:
 
     def get_answer(self, channel_id, know_id):
         cid2content = self.id2content.get(channel_id, {})
-        content = cid2content.get(know_id,{})
+        content = cid2content.get(know_id, {})
         answer = content.get('answer', '...')
         return answer
 
     def get_title(self, channel_id, know_id):
         cid2content = self.id2content.get(channel_id, {})
-        content = cid2content.get(know_id,{})
+        content = cid2content.get(know_id, {})
         title = content.get('title', '...')
         return title
 
 
 if __name__ == '__main__':
     qa_tool = QaTool("data/qa_pair_data.txt")
-
-    print(qa_tool.get_title("1000","qa-pair-11"))
-    print(qa_tool.get_answer("1000", "qa-pair-11"))
+    qid = "qa-pair-66"
+    print(qa_tool.get_title("1000", qid))
+    print(qa_tool.get_answer("1000", qid))

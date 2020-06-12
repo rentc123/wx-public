@@ -11,6 +11,6 @@
 # ================================================================
 
 import  ahocorasick     # 导入包
-tree = ahocorasick.AhoCorasick("南京","南京市","长江大桥","市长", "江大桥") # 构建ac自动机
-print(tree.search("南京市长江大桥")) # 检索
+tree = ahocorasick.AhoCorasick("南京","南京市","长江大桥","市长", "江大桥","长江") # 构建ac自动机
+print(tree.search("南京市长江大桥",True)) # 检索
 

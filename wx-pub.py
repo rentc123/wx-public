@@ -56,6 +56,7 @@ def hello(message):
                     answers = content.get('answers', [])
                     if len(answers) == 1:
                         know_id = answers[0].get('answer')
+                        logger.info("know_id: {}".format(know_id))
                         answer = qa_tool.get_answer(tenant_id, know_id)
                         response_texts.append(answer)
                     elif len(answers) > 1:
